@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <nav class='main-nav'>
+      <div class='profile'>
+        <% if current_user %>
+        <h1>You are Logged In, <%= current_user.username %></h1>
+        <%= button_to 'Logout', '/logout', method: :delete %>
+        <% else %>
+        <%= button_to 'Sign Up', '/users/new', method: :get%>
+        <%= button_to 'Login', '/login', method: :get%>
+        <%end%>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
