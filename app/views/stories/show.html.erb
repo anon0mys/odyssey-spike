@@ -1,0 +1,30 @@
+<div class="page-title">
+  <h2><%= @story.name %></h2>
+</div>
+
+<div class='story-main'>
+  <div class="story-info">
+    <p><%= @story.description %></p>
+    <div class="story-show-buttons">
+      <% if current_user == @story.user %>
+        <div class="buttons">
+          <%= link_to 'Edit', edit_story_path(@story), class: 'form-control edit card-button' %>
+          <%= button_to 'Delete', story_path(@story), method: 'delete', class: 'form-control delete card-button'%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="story-plot-point-container">
+    <% @story.plot_points.each do |point| %>
+      <div class="plot-point-container">
+        <p><%= point.name %></p>
+        <p><%= point.description %></p>
+        <p><%= point.hidden %></p>
+        <p><%= point.visibility_radius %></p>
+        <p><%= point.latitude %></p>
+        <p><%= point.longitude %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

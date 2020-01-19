@@ -1,0 +1,26 @@
+<div class='page-title'>
+  <h2>All Your Stories</h2>
+  <div class='story-buttons'>
+    <%= link_to 'Create', new_story_path, class: 'form-control create card-button' %>
+  </div>
+</div>
+
+<% unless @stories.nil? %>
+  <ul class='cards-container'>
+    <% @stories.each do |story| %>
+        <li class='card'>
+          <%= link_to story_path(story) do %>
+            <div class='card-title-container'>
+              <div class='story-title'>
+                <%= story.name %>
+              </div>
+            </div>
+            <div class='card-data-container'>
+              <p class='user-show-description'><%= story.description[0..100] %></p>
+              <p>Number of Points: <%= story.plot_points.count %> </p>
+            </div>
+          <% end %>
+        </li>
+    <% end %>
+  </ul>
+<% end %>

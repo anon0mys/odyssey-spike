@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_19_024526) do
+ActiveRecord::Schema.define(version: 2020_01_19_033634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "plot_points", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.boolean "hidden"
+    t.float "visibility_radius"
+    t.decimal "latitude", precision: 15, scale: 12
+    t.decimal "longitude", precision: 15, scale: 12
+    t.bigint "story_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["story_id"], name: "index_plot_points_on_story_id"
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_stories_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -22,4 +44,6 @@ ActiveRecord::Schema.define(version: 2020_01_19_024526) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "plot_points", "stories"
+  add_foreign_key "stories", "users"
 end
