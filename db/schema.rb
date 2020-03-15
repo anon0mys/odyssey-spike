@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_19_033634) do
+ActiveRecord::Schema.define(version: 2020_03_11_015028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "plot_paths", force: :cascade do |t|
+    t.bigint "story_id"
+    t.bigint "to_id"
+    t.bigint "from_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["from_id"], name: "index_plot_paths_on_from_id"
+    t.index ["story_id"], name: "index_plot_paths_on_story_id"
+    t.index ["to_id"], name: "index_plot_paths_on_to_id"
+  end
 
   create_table "plot_points", force: :cascade do |t|
     t.string "name"
@@ -44,6 +55,9 @@ ActiveRecord::Schema.define(version: 2020_01_19_033634) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "plot_paths", "plot_points", column: "from_id"
+  add_foreign_key "plot_paths", "plot_points", column: "to_id"
+  add_foreign_key "plot_paths", "stories"
   add_foreign_key "plot_points", "stories"
   add_foreign_key "stories", "users"
 end

@@ -1,7 +1,7 @@
 <div class='page-title'>
   <h2>All Your Stories</h2>
   <div class='story-buttons'>
-    <%= link_to 'Create', new_story_path, class: 'form-control create card-button' %>
+    <%= button_to 'Create', new_story_path, method: 'get', class: 'form-control create card-button' %>
   </div>
 </div>
 
@@ -17,7 +17,7 @@
             </div>
             <div class='card-data-container'>
               <p class='user-show-description'><%= story.description[0..100] %></p>
-              <p>Number of Points: <%= story.plot_points.count %> </p>
+              <p>Number of Points: <%= story.story_points.count %> </p>
             </div>
           <% end %>
         </li>

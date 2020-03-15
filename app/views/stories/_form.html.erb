@@ -9,7 +9,7 @@
   </div>
 
   <div class="buttons">
-    <%= link_to 'Cancel', stories_path, class: 'form-control cancel' %>
+    <%= button_to 'Cancel', stories_path, method: 'get', class: 'form-control cancel' %>
     <% if @story.id.nil? %>
       <%= f.submit 'Create Story', class: 'form-control submit' %>
     <% else %>
