@@ -3,7 +3,7 @@ class Api::V1::StoriesController < ApiController
   before_action :get_story, only: [:edit, :update, :destroy]
 
   def index
-    @stories = Story.all
+    @stories = Story.filter(params.slice(:user))
     render json: @stories
   end
 
