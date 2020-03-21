@@ -1,13 +1,14 @@
 class Api::V1::StoriesController < ApiController
   include Storyable
-  before_action :get_story, only: [:show, :edit, :update, :destroy]
+  before_action :get_story, only: [:edit, :update, :destroy]
 
   def index
-    @stories = current_api_user.stories.all
+    @stories = Story.all
     render json: @stories
   end
 
   def show
+    @story = Story.find(params[:id])
     render json: @story
   end
 
