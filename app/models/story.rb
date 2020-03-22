@@ -7,4 +7,5 @@ class Story < ApplicationRecord
   has_many :plot_paths, dependent: :destroy
 
   scope :filter_by_user, -> (user) { where user: user }
+  scope :filter_by_name, -> (search) { where 'name ILIKE ?', "%#{search}%" }
 end
