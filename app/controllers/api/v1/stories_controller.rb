@@ -34,6 +34,10 @@ class Api::V1::StoriesController < ApiController
   end
 
   def filter_params
-    params.slice(:user, :name)
+    filters = params.slice(:user, :name)
+    if params.key?(:lat) and params.key?(:lng)
+      filters[:within] = [params[:lat].to_f, params[:lng].to_f, params.fetch(:radius, 1).to_i]
+    end
+    filters
   end
 end

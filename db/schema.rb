@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_015028) do
+ActiveRecord::Schema.define(version: 2020_03_22_064035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "plot_paths", force: :cascade do |t|
     t.bigint "story_id"
@@ -36,6 +37,8 @@ ActiveRecord::Schema.define(version: 2020_03_11_015028) do
     t.bigint "story_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.geography "point_lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.index ["point_lonlat"], name: "index_plot_points_on_point_lonlat", using: :gist
     t.index ["story_id"], name: "index_plot_points_on_story_id"
   end
 
